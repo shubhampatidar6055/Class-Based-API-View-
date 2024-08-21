@@ -20,6 +20,13 @@ class Studentapi(APIView):
         stu = Student.objects.all()
         serialzer = StudentSerializer(stu, many = True)
         return Response(serialzer.data)
+    
+    def get(self,request):
+        data = request.data
+        id = data.get('id')
+        stu = Student.objects.filter(id=id)
+        serializer = StudentSerializer(stu, many=True)
+        return Response(serializer.data)
 
     def put(self,request):
         data = request.data
